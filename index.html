@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="main.css">
     <h1> Bar Game </h1>
+    <p id = "fullbarstext"> </p>
   </head>
 <body>
   <p>Bar 1 [] </p> <button id="buy1bar">Buy for</button>
@@ -10,5 +11,31 @@
 </html>
 <script>
   let fullbar = 0;
-  document.getElementById("buy1bar").innerText = fullbar.toString();
+  class upgrade {
+    constructor(id, name,basecost){
+      const button = document.getElementById(id);
+      if(!button){
+        throw new Error("id wrong dumbass button doesn't exist")
+      }
+      this.id = id;
+      this.name = name;
+      this.basecost = basecost;
+      this.cost = basecost;
+      this.button = button;
+      this.mult = 1;
+      this.scaling = 1.25;
+      button.innerText = name + " " + "Cost: " + basecost.toString();
+    }
+    update(){
+      let cost = this.basecost
+      this.button.innerText = this.name + " " + "Cost: " + cost.toString();
+    }
+    buy(){
+      if(fullbar >= this.cost){
+        fullbar = fullbar - this.cost
+        this.cost = this.cost * this.scaling;
+        update()
+      }
+    }
+  }
 </script>
