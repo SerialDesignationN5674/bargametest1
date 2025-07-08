@@ -10,7 +10,7 @@ function plus(key,value){ // another fyunction
 }
 function minus(key,value){ // i hate this stuff
   let e = localStorage.getItem(key)
-  localstorage.setItem(key,e-value)
+  localStorage.setItem(key,e-value)
 }
   class Upgrade { // class for upgrades duh
     constructor(id, name,basecost,repeatable){
@@ -22,6 +22,7 @@ function minus(key,value){ // i hate this stuff
       this.bought = false;
       this.id = id;
       this.name = name;
+      this.purchases = 0; // fixed stupid error
       this.basecost = basecost;
       this.cost = basecost;
       this.button = button;
@@ -67,6 +68,7 @@ function minus(key,value){ // i hate this stuff
       this.id = id
       this.text = text
       const p = document.getElementById(id) // get real, text
+      this.p = p
       p.innerText = text // u cant understand that ????
     }
     update(value){
