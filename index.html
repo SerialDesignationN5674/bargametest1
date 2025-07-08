@@ -12,11 +12,13 @@
 <script>
   let fullbar = 0;
   class upgrade {
-    constructor(id, name,basecost){
+    constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
         throw new Error("id wrong dumbass button doesn't exist")
       }
+      this.repeateble = repeatable;
+      this.bought = false;
       this.id = id;
       this.name = name;
       this.basecost = basecost;
@@ -24,18 +26,22 @@
       this.button = button;
       this.mult = 1;
       this.scaling = 1.25;
+      this.capped = false;
       button.innerText = name + " " + "Cost: " + basecost.toString();
     }
     update(){
-      let cost = this.basecost
-      this.button.innerText = this.name + " " + "Cost: " + cost.toString();
+      this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
     }
     buy(){
       if(fullbar >= this.cost){
-        fullbar = fullbar - this.cost
-        this.cost = this.cost * this.scaling;
-        update()
+        if(this.repeatable == false & this.bought == false || this.repeatable == true && this.capped == false){
+          fullbar = fullbar - this.cost
+          this.cost = this.cost * this.scaling;
+          this.bought = true
+          update()
+        }
       }
     }
   }
+  const bar1upg = new upgrade("buy1bar", "Buy 1 bar", 10, true)
 </script>
