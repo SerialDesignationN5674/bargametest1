@@ -1,4 +1,17 @@
-let fullbar = 100;
+let fullbar = 10;
+let n = localStorage.getItem("fullbars")
+if(n == null){
+  fullbar = 10
+  localStorage.setItem("fullbars",10)
+}
+function plus(key,value){
+  let e = localStorage.getItem(key)
+  localstorage.setItem(key,e+value)
+}
+function minus(key,value){
+  let e = localStorage.getItem(key)
+  localstorage.setItem(key,e-value)
+}
   class Upgrade {
     constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
