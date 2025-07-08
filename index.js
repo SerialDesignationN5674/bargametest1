@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let t = 0;
   let fullbar = parseInt(localStorage.getItem("fullbars")) || 10;
   if(!localStorage.getItem("fullbars")){ //STUPID
     localStorage.setItem("fullbars", fullbar)
