@@ -4,51 +4,39 @@ on:
     paths:
       - '**.js'
       - '**.html'
-      - '**.json'
   pull_request:
-    paths:
-      - '**.js'
-      - '**.html'
-      - '**.json'
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Handle Node dependencies
+      - name: Install Playwright (for browser testing)
         run: |
-          if [ -f package.json ]; then
-            npm install
-            echo "install node js stuff"
-          else
-            echo "install node js stuff"
-          fi
-          
-      - name: Install html-validator
-        run: |
-          npm install -g html-validator
-          echo "installing html stuff"
+          npm init -y
+          npm install playwright
+          echo "installing browser stuff"
 
-      - name: Run HTML validation
-        run: |
-          if [ -f index.html ]; then
-            validator --file=index.html --verbose || echo "html is error"
-          else
-            echo "html is error"
-          fi
-
-      - name: Run and Test index.js
+      - name: Run Browser Tests
         run: |
           if [ -f index.js ]; then
-            node index.js || exit 1
-            echo "no errors"
+            node <<EOF
+            const { chromium } = require('playwright');
+            (async () => {
+              const browser = await chromium.launch();
+              const page = await browser.newPage();
+              await page.goto('file://${GITHUB_WORKSPACE}/index.html');
+              await page.addScriptTag({ path: 'index.js' });
+              console.log("no errors - browser loaded your hilarious code");
+              await browser.close();
+            })();
+            EOF
           else
             echo "no errors"
           fi
