@@ -1,22 +1,22 @@
 let fullbar = 10;
-let n = localStorage.getItem("fullbars");
+let n = localStorage.getItem("fullbars")
 if(n == null){ //STUPID
-  fullbar = 10;
-  localStorage.setItem("fullbars",10);
+  fullbar = 10
+  localStorage.setItem("fullbars",10)
 }
 function plus(key,value){ // another fyunction
-  let e = localStorage.getItem(key);
-  localstorage.setItem(key,e+value);
+  let e = parseInt(localStorage.getItem(key)) || 0
+  localStorage.setItem(key,e+value)
 }
 function minus(key,value){ // i hate this stuff
-  let e = localStorage.getItem(key);
-  localStorage.setItem(key,e-value);
+  let e = parseInt(localStorage.getItem(key)) || 0
+  localStorage.setItem(key,e-value)
 }
-  class Upgrade { // class for upgrades duh
+class Upgrade { // class for upgrades duh
     constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
-        throw new Error("id wrong dumbass button doesn't exist");
+        throw new Error("id wrong dumbass button doesn't exist")
       }
       this.repeatable = repeatable; // read
       this.bought = false;
@@ -38,51 +38,49 @@ function minus(key,value){ // i hate this stuff
     buy(){ // buy brain
       if(fullbar >= this.cost){
         if((!this.repeatable && !this.bought) || (this.repeatable && !this.capped)){
-          fullbar = fullbar - this.cost;
+          fullbar = fullbar - this.cost
           this.cost = this.cost * this.scaling;
-          this.bought = true;
-          this.purchases += 1; // understna
-          this.update();
+          this.bought = true
+          this.purchases += 1 // understna
+          this.update()
+          localStorage.setItem("fullbars", fullbar)
         }
       }
     }
     change(name,repeatable,scaling){ // change floor
       this.name = name;
       this.repeatable = repeatable;
-      this.scaling = scaling;
+      this.scaling = scaling
       this.update();
     }
     getPurchases(){
-      return this.purchases; // b
+      return this.purchases // b
     }
     getValue(){
       if(this.purchases != 0){ // so u dont divide ur brain by 0 accideantly
-        return (this.purchases * this.mult) / 20;
+        return (this.purchases * this.mult) / 20
       }
       return 0
     }
-  }
-  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
-  bar1upg.update() // update ur balls
-  class Text {
+}
+const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
+bar1upg.update() // update ur balls
+class Text {
     constructor(id,text){
-      this.id = id;
-      this.text = text;
-      const p = document.getElementById(id); // get real, text
-      this.p = p;
-      p.innerText = text; // u cant understand that ????
+      this.id = id
+      this.text = text
+      this.p = document.getElementById(id) // get real, text
+      this.p.innerText = text // u cant understand that ????
     }
     update(value){
-      this.text = value;
-      this.p.innerText = value; // set ur balls
+      this.text = value
+      this.p.innerText = value // set ur balls
     }
-  }
-const bartext = new Text("fullbarstext", "ur bars");
+}
+const bartext = new Text("fullbarstext", "ur bars")
 const interval = setInterval(() => { // stupid while but js doesnt have wait
-  // Your code to run 20 times per second
-  bar1upg.update(); // duh
-  fullbar += bar1upg.getValue(); // some nerd stuff
-  bartext.update("You have " + fullbar.toString() + " " + "FullBars"); // get a brain
-  localStorage.setItem("fullbars",fullbar); // nedrline
+  bar1upg.update() // duh
+  fullbar += bar1upg.getValue() || 0 // some nerd stuff
+  bartext.update("You have " + fullbar.toString() + " " + "FullBars") // get a brain
+  localStorage.setItem("fullbars", fullbar) // nedrline
 }, 50)
-
