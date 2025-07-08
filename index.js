@@ -40,6 +40,7 @@ function minus(key,value){ // i hate this stuff
           fullbar = fullbar - this.cost
           this.cost = this.cost * this.scaling;
           this.bought = true
+          this.purchases += 1 // understna
           this.update()
         }
       }
@@ -49,6 +50,14 @@ function minus(key,value){ // i hate this stuff
       this.repeatable = repeatable;
       this.scaling = scaling
       this.update();
+    }
+    getPurchases(){
+      return this.purchases // b
+    }
+    getValue(){
+      if(this.purchases != 0){ // so u dont divide ur brain by 0 accideantly
+        return (this.purchases * this.mult) / 20
+      }
     }
   }
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
@@ -65,10 +74,11 @@ function minus(key,value){ // i hate this stuff
       p.innerText = value // set ur balls
     }
   }
-const bartext = new Text()
+const bartext = new Text("fullbarstext", "ur bars")
 const interval = setInterval(() => { // stupid while but js doesnt have wait
   // Your code to run 20 times per second
   bar1upg.update() // duh
-  
+  fullbars += bar1upg.getValue() // some nerd stuff
+  bartext.update("You have " + fullbars.toString() + " " + "FullBars") // get a brain
 }, 50)
 
