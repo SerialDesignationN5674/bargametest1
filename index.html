@@ -11,7 +11,7 @@
 </html>
 <script>
   let fullbar = 0;
-  class upgrade {
+  class Upgrade {
     constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
@@ -47,8 +47,9 @@
       this.name = name;
       this.repeatable = repeatable;
       this.scaling = scaling
+      this.update();
     }
   }
-  const bar1upg = new upgrade("buy1bar", "Buy 1 bar", 10, true)
+  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true)
   bar1upg.update()
 </script>
