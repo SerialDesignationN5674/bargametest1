@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!localStorage.getItem("fullbars")){ //STUPID
     localStorage.setItem("fullbars", fullbar)
   }
-
+  const test = 0;
   function plus(key,value){ // another fyunction
     let e = parseInt(localStorage.getItem(key)) || 0
     localStorage.setItem(key,e+value)
