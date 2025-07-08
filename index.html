@@ -28,17 +28,18 @@
       this.scaling = 1.25;
       this.capped = false;
       button.innerText = name + " " + "Cost: " + basecost.toString();
+      button.addEventListener('click', () >= this.buy());
     }
     update(){
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
     }
     buy(){
       if(fullbar >= this.cost){
-        if(this.repeatable == false & this.bought == false || this.repeatable == true && this.capped == false){
+        if((!this.repeatable && !this.bought) || (this.repeatable && !this.capped)){
           fullbar = fullbar - this.cost
           this.cost = this.cost * this.scaling;
           this.bought = true
-          update()
+          this.update()
         }
       }
     }
