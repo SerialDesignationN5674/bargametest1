@@ -1,1 +1,42 @@
-
+let fullbar = 100;
+  class Upgrade {
+    constructor(id, name,basecost,repeatable){
+      const button = document.getElementById(id);
+      if(!button){
+        throw new Error("id wrong dumbass button doesn't exist")
+      }
+      this.repeatable = repeatable;
+      this.bought = false;
+      this.id = id;
+      this.name = name;
+      this.basecost = basecost;
+      this.cost = basecost;
+      this.button = button;
+      this.mult = 1;
+      this.scaling = 1.25;
+      this.capped = false;
+      button.innerText = name + " " + "Cost: " + basecost.toString();
+      button.addEventListener('click', () => this.buy());
+    }
+    update(){
+      this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
+    }
+    buy(){
+      if(fullbar >= this.cost){
+        if((!this.repeatable && !this.bought) || (this.repeatable && !this.capped)){
+          fullbar = fullbar - this.cost
+          this.cost = this.cost * this.scaling;
+          this.bought = true
+          this.update()
+        }
+      }
+    }
+    change(name,repeatable,scaling){
+      this.name = name;
+      this.repeatable = repeatable;
+      this.scaling = scaling
+      this.update();
+    }
+  }
+  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true)
+  bar1upg.update()
