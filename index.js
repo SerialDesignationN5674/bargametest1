@@ -1,24 +1,24 @@
 let fullbar = 10;
 let n = localStorage.getItem("fullbars")
-if(n == null){
+if(n == null){ //STUPID
   fullbar = 10
   localStorage.setItem("fullbars",10)
 }
-function plus(key,value){
+function plus(key,value){ // another fyunction
   let e = localStorage.getItem(key)
   localstorage.setItem(key,e+value)
 }
-function minus(key,value){
+function minus(key,value){ // i hate this stuff
   let e = localStorage.getItem(key)
   localstorage.setItem(key,e-value)
 }
-  class Upgrade {
+  class Upgrade { // class for upgrades duh
     constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
         throw new Error("id wrong dumbass button doesn't exist")
       }
-      this.repeatable = repeatable;
+      this.repeatable = repeatable; // read
       this.bought = false;
       this.id = id;
       this.name = name;
@@ -28,13 +28,13 @@ function minus(key,value){
       this.mult = 1;
       this.scaling = 1.25;
       this.capped = false;
-      button.innerText = name + " " + "Cost: " + basecost.toString();
-      button.addEventListener('click', () => this.buy());
+      button.innerText = name + " " + "Cost: " + basecost.toString(); // because yes
+      button.addEventListener('click', () => this.buy()); // JAUIREGJOAREGRAE
     }
-    update(){
+    update(){ // update ur head
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
     }
-    buy(){
+    buy(){ // buy brain
       if(fullbar >= this.cost){
         if((!this.repeatable && !this.bought) || (this.repeatable && !this.capped)){
           fullbar = fullbar - this.cost
@@ -44,12 +44,31 @@ function minus(key,value){
         }
       }
     }
-    change(name,repeatable,scaling){
+    change(name,repeatable,scaling){ // change floor
       this.name = name;
       this.repeatable = repeatable;
       this.scaling = scaling
       this.update();
     }
   }
-  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true)
-  bar1upg.update()
+  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
+  bar1upg.update() // update ur balls
+  class Text(){
+    constructor(id,text){
+      this.id = id
+      this.text = text
+      const p = document.getElementById(id) // get real, text
+      p.innerText = text // u cant understand that ????
+    }
+    update(value){
+      this.text = value
+      p.innerText = value // set ur balls
+    }
+  }
+const bartext = new Text()
+const interval = setInterval(() => { // stupid while but js doesnt have wait
+  // Your code to run 20 times per second
+  bar1upg.update() // duh
+  
+}, 50)
+
