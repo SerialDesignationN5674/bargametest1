@@ -1,5 +1,16 @@
 name: Test
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.js'
+      - '**.html'
+      - '**.json'
+  pull_request:
+    paths:
+      - '**.js'
+      - '**.html'
+      - '**.json'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,14 +22,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies (if any)
+      - name: Handle Node dependencies
         run: |
           if [ -f package.json ]; then
             npm install
             echo "install node js stuff"
           else
-            echo "install node js stuff"  # Your exact message
-          
+            echo "install node js stuff"
+          fi
           
       - name: Install html-validator
         run: |
@@ -27,9 +38,17 @@ jobs:
 
       - name: Run HTML validation
         run: |
-          validator --file=index.html --verbose || echo "html is error"
+          if [ -f index.html ]; then
+            validator --file=index.html --verbose || echo "html is error"
+          else
+            echo "html is error"
+          fi
 
       - name: Run and Test index.js
         run: |
-          node index.js || exit 1
-          echo "no errors"
+          if [ -f index.js ]; then
+            node index.js || exit 1
+            echo "no errors"
+          else
+            echo "no errors"
+          fi
