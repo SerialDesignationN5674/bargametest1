@@ -1,1 +1,31 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
+      - name: Install dependencies (if any)
+        run: |
+          npm install
+          echo "install node js stuff"
+          
+      - name: Install html-validator
+        run: |
+          npm install -g html-validator
+          echo "installing html stuff"
+
+      - name: Run HTML validation
+        run: |
+          validator --file=index.html --verbose || echo "html is error"
+
+      - name: Run and Test index.js
+        run: |
+          node index.js || exit 1
+          echo "no errors"
