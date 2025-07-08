@@ -13,8 +13,12 @@ jobs:
 
       - name: Install dependencies (if any)
         run: |
-          npm install
-          echo "install node js stuff"
+          if [ -f package.json ]; then
+            npm install
+            echo "install node js stuff"
+          else
+            echo "install node js stuff"  # Your exact message
+          
           
       - name: Install html-validator
         run: |
