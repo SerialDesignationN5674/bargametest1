@@ -1,18 +1,20 @@
-let fullbar = 10;
-let n = localStorage.getItem("fullbars")
-if(n == null){ //STUPID
-  fullbar = 10
-  localStorage.setItem("fullbars",10)
-}
-function plus(key,value){ // another fyunction
-  let e = parseInt(localStorage.getItem(key)) || 0
-  localStorage.setItem(key,e+value)
-}
-function minus(key,value){ // i hate this stuff
-  let e = parseInt(localStorage.getItem(key)) || 0
-  localStorage.setItem(key,e-value)
-}
-class Upgrade { // class for upgrades duh
+document.addEventListener('DOMContentLoaded', () => {
+  let fullbar = parseInt(localStorage.getItem("fullbars")) || 10;
+  if(!localStorage.getItem("fullbars")){ //STUPID
+    localStorage.setItem("fullbars", fullbar)
+  }
+
+  function plus(key,value){ // another fyunction
+    let e = parseInt(localStorage.getItem(key)) || 0
+    localStorage.setItem(key,e+value)
+  }
+
+  function minus(key,value){ // i hate this stuff
+    let e = parseInt(localStorage.getItem(key)) || 0
+    localStorage.setItem(key,e-value)
+  }
+
+  class Upgrade { // class for upgrades duh
     constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
@@ -62,10 +64,9 @@ class Upgrade { // class for upgrades duh
       }
       return 0
     }
-}
-const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
-bar1upg.update() // update ur balls
-class Text {
+  }
+
+  class Text {
     constructor(id,text){
       this.id = id
       this.text = text
@@ -76,11 +77,16 @@ class Text {
       this.text = value
       this.p.innerText = value // set ur balls
     }
-}
-const bartext = new Text("fullbarstext", "ur bars")
-const interval = setInterval(() => { // stupid while but js doesnt have wait
-  bar1upg.update() // duh
-  fullbar += bar1upg.getValue() || 0 // some nerd stuff
-  bartext.update("You have " + fullbar.toString() + " " + "FullBars") // get a brain
-  localStorage.setItem("fullbars", fullbar) // nedrline
-}, 50)
+  }
+
+  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
+  bar1upg.update() // update ur balls
+  const bartext = new Text("fullbarstext", "ur bars")
+
+  const interval = setInterval(() => { // stupid while but js doesnt have wait
+    bar1upg.update() // duh
+    fullbar += bar1upg.getValue() || 0 // some nerd stuff
+    bartext.update("You have " + fullbar.toString() + " " + "FullBars") // get a brain
+    localStorage.setItem("fullbars", fullbar) // nedrline
+  }, 50)
+});
