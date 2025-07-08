@@ -80,7 +80,8 @@ const bartext = new Text("fullbarstext", "ur bars")
 const interval = setInterval(() => { // stupid while but js doesnt have wait
   // Your code to run 20 times per second
   bar1upg.update() // duh
-  fullbars += bar1upg.getValue() // some nerd stuff
+  fullbar += bar1upg.getValue() // some nerd stuff
   bartext.update("You have " + fullbars.toString() + " " + "FullBars") // get a brain
+  localStorage.setItem("fullbars",fullbar) // nedrline
 }, 50)
 
