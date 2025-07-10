@@ -4,3 +4,10 @@ p {
 .hidden{
   display: none;
 }
+.bar{
+  font-size: 20px;
+}
+.button{
+  padding: 20px 15px;
+  font-size: 15px;
+}
