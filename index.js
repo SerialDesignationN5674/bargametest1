@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.purchases += 1 // understna
           this.update()
           localStorage.setItem("fullbars", fullbar)
-          plus(id, 1)
+          plus(this.id, 1)
         }
       }
     }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
-    bartext.update("You have " + math.floor(fullbar).toString() + " " + "FullBars") // get a brain
+    bartext.update("You have " + Math.floor(fullbar).toString() + " " + "FullBars") // get a brain
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
