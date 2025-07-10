@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const storedPurch = localStorage.getItem(id) || 0;
       this.purchases = 0; // fixed stupid error
       this.basecost = basecost;
-      this.cost = basecost;
+      this.cost = localStorage.getItem(id + "cost") || basecost;
       this.button = button;
       this.mult = 1;
       this.scaling = 1.25;
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.bought = true
           this.purchases += 1 // understna
           this.update()
+          localStorage.setItem(this.id + "cost", this.cost)
           localStorage.setItem("fullbars", fullbar)
           plus(this.id, 1)
         }
