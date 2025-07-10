@@ -61,10 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return this.purchases // b
     }
     getValue(){
-      if(this.purchases != 0){ // so u dont divide ur brain by 0 accideantly
-        return ((localStorage.getItem(this.id) || this.purchases) * this.mult) / 20
-      }
-      return 0
+     // so u dont divide ur brain by 0 accideantly
+      return ((localStorage.getItem(this.id) || this.purchases) * this.mult) / 20
     }
   }
 
