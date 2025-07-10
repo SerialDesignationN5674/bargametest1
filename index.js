@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-    change(name,repeatable,scaling){ // change floor
+    change(name,repeatable,scaling){ // change 
       this.name = name;
       this.repeatable = repeatable;
       this.scaling = scaling
@@ -75,12 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     update(value){
       this.text = value
-      this.p.innerText = value // set ur balls
+      this.p.innerText = value // set ur brain
     }
   }
 
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
-  bar1upg.update() // update ur balls
+  bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars")
 
   const interval = setInterval(() => { // stupid while but js doesnt have wait
