@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.bought = false;
       this.id = id;
       this.name = name;
+      const storedPurch = localStorage.getItem(id) || 0;
       this.purchases = 0; // fixed stupid error
       this.basecost = basecost;
       this.cost = basecost;
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.mult = 1;
       this.scaling = 1.25;
       this.capped = false;
-      button.innerText = name + " " + "Cost: " + basecost.toString(); // because yes
+      button.innerText = name + " " + "Cost: " + basecost.toString();// because yes
       button.addEventListener('click', () => this.buy()); // JAUIREGJOAREGRAE
     }
     update(){ // update ur head
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.purchases += 1 // understna
           this.update()
           localStorage.setItem("fullbars", fullbar)
+          plus(id, 1)
         }
       }
     }
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getValue(){
       if(this.purchases != 0){ // so u dont divide ur brain by 0 accideantly
-        return (this.purchases * this.mult) / 20
+        return ((localStorage.getItem(this.id) || this.purchases) * this.mult) / 20
       }
       return 0
     }
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
-    bartext.update("You have " + fullbar.toString() + " " + "FullBars") // get a brain
+    bartext.update("You have " + math.floor(fullbar).toString() + " " + "FullBars") // get a brain
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
