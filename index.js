@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => this.buy()); // JAUIREGJOAREGRAE
     }
     isFull(){ // i hate this i dont think i need this but its useful i bet
-      if(this.fullity) >= 1{
+      if(this.fullity >= 1) {
         return true;
       }
-      if(this.fullity) < 1{
+      if(this.fullity < 1) {
         return false;
       }
     }
