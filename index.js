@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     updateFullity(){
-      this.fullity = this.cost*10/this.generated;
+      this.fullity = this.basecost*1000/this.generated;
     }
     update(){ // update ur head
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
