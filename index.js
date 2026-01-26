@@ -121,3 +121,4 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
+// put here so it updates
