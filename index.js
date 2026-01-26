@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     updateFullity(){
-      this.fullity = this.basecost*1000/this.generated;
+      this.fullity = this.generated/this.basecost*1000;
     }
     update(){ // update ur head
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
@@ -102,11 +102,42 @@ document.addEventListener('DOMContentLoaded', () => {
       this.p.innerText = value // set ur brain
     }
   }
-
+  class SacrificeBase{
+    constructor(id,name,cost,scaling){
+       const button = document.getElementById(id);
+       if(!button){
+         throw new Error("id wrong dumbass button doesn't exist")
+       }
+      this.button = button;
+      this.id = id;
+      this.name = name;
+      this.cost = cost;
+      this.scaling = scaling;
+    }
+    change(name,scaling,cost){
+      if(name){
+        this.name = name || 'Placeholder';
+      }
+      if(cost){
+        this.cost = cost || false;
+      }
+      if(scaling){
+        this.scaling = scaling || 1.025;
+      }
+      this.update();
+    }
+    update(additional){
+      this.button.innerText = this.name + " " + additional + " " + "Cost: " + this.cost.toString();
+    }
+  }
+  class expand extends SacrificeBase{
+    constructor(id,name,cost,scaling){
+      super(id,name,cost,scaling)
+    }
+  }
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars")
-  const expand = new Upgrade("barexpand", "Expand and gain another bar but u need 1 full bar", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, true)
   let bar1full = false
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
