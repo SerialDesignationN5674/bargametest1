@@ -33,8 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
       this.mult = 1;
       this.scaling = 1.25;
       this.capped = false;
+      this.fullity = 0;
+      this.generated = 0;
       button.innerText = name + " " + "Cost: " + basecost.toString();// because yes
       button.addEventListener('click', () => this.buy()); // JAUIREGJOAREGRAE
+    }
+    isFull(){ // i hate this i dont think i need this but its useful i bet
+      if(this.fullity) >= 1{
+        return true;
+      }
+      if(this.fullity) < 1{
+        return false;
+      }
+    }
+    updateFullity(){
+      this.fullity = this.cost*10/this.generated;
     }
     update(){ // update ur head
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
@@ -54,10 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     change(name,repeatable,scaling){ // change 
-      this.name = name;
-      this.repeatable = repeatable;
-      this.scaling = scaling
+      if(name){
+        this.name = name || 'Placeholder';
+      }
+      if(repeatable){
+        this.repeatable = repeatable || false;
+      }
+      if(scaling){
+        this.scaling = scaling || 1.025;
+      }
       this.update();
+    }
+    addGenerated(gen){
+      this.generated = this.generated + gen; // wow what a bad function
     }
     getPurchases(){
       return this.purchases // b
@@ -84,11 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars")
-
+  let bar1full = false
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
+    bar1upg.addGen(bar1upg.getValue() || 0) // i wonder why we need this
     bartext.update("You have " + fullbar.toFixed(2).toString() + " " + "FullBars") // get a brain
+    if(bar1upg.isFull() == false){
+      bar1upg.updateFullity() // dont ask the name
+    }
+    if(bar1upg.isFull() == true){
+      bar1upg.change("Buy 1 bar ITS FULL ITS FULL") // Oh mi gawd! fix ur code u have terrible optimisation
+    }
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
