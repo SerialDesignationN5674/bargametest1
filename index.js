@@ -1,4 +1,4 @@
-import bignum from break_infinity
+import BigNum from break_infinity
 document.addEventListener('DOMContentLoaded', () => {
   let fullbar = parseInt(localStorage.getItem("fullbars")) || 10;
   if(!localStorage.getItem("fullbars")){ //STUPID
