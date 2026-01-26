@@ -1,7 +1,4 @@
 // totally not stealing from ad :)
-{
-  "type": "module"
-}
 class BigNum {
   constructor(m, e) {
     this.m = m; // 1 ≤ m < 10
