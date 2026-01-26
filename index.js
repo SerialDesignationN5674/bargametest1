@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
-    bar1upg.addGen(bar1upg.getValue() || 0) // i wonder why we need this
+    bar1upg.addGenerated(bar1upg.getValue() || 0) // i wonder why we need this
     bartext.update("You have " + fullbar.toFixed(2).toString() + " " + "FullBars") // get a brain
     if(bar1upg.isFull() == false){
       bar1upg.updateFullity() // dont ask the name
