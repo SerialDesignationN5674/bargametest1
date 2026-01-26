@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars")
+  const expand = new Upgrade("expandbar", "Expand and gain another bar but u need 1 full bar", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, true)
   let bar1full = false
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
