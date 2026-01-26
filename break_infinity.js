@@ -40,4 +40,4 @@ class BigNum {
     return this.m.toFixed(2) + "e" + this.e;
   }
 }
-export default { BigNum };
+export default BigNum;
