@@ -227,3 +227,4 @@ buyMaxBtn.addEventListener("click", () => {
   }, 50)
 });
 // put here so it updates
+// x2
