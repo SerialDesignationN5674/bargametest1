@@ -79,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
           plus(this.id, 1)
           }
         }
-      }
     }
     buyMax(){
       let boughtSomething = false;
@@ -220,10 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
       bar2upg.show()
       bar1upg.changemult(bar1upg.getMult() + Math.log10(bar2upg.value+1)/15)
     }
-    const buyMaxBtn = document.getElementById("buyMax");
+    
+});
+  const buyMaxBtn = document.getElementById("buyMax");
 buyMaxBtn.addEventListener("click", () => {
   bar1upg.buyMax();
-});
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
