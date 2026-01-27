@@ -77,6 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem(this.id + "cost", this.cost)
           localStorage.setItem("fullbars", fullbar)
           plus(this.id, 1)
+          buyMax(){
+  let boughtSomething = false;
+
+  while(fullbar >= this.cost){
+    if((!this.repeatable && this.bought) || this.capped){
+      break;
+    }
+
+    fullbar -= this.cost;
+    this.cost = this.cost * this.scaling;
+    this.bought = true;
+    this.purchases += 1;
+    boughtSomething = true;
+
+    plus(this.id, 1);
+  }
+
+  if(boughtSomething){
+    this.update();
+    localStorage.setItem(this.id + "cost", this.cost);
+    localStorage.setItem("fullbars", fullbar);
+  }
+          }
         }
       }
     }
@@ -195,6 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
       bar2upg.show()
       bar1upg.changemult(bar1upg.getMult() + Math.log10(bar2upg.value+1)/15)
     }
+    const buyMaxBtn = document.getElementById("buyMax");
+buyMaxBtn.addEventListener("click", () => {
+  bar1upg.buyMax();
+});
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
