@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.expanded += 1;
         bar2upg.show();
         bar1upg.reset();
+        localStorage.setItem(this.id, this.expanded)
       }
     }
   }
