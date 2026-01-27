@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(bar1upg.isFull() == true){
       bar1upg.change("Buy 1 bar ITS FULL ITS FULL") // Oh mi gawd! fix ur code u have terrible optimisation
     }
-    if(bar2upg.isActive(){
+    if(bar2upg.isActive()){
       bar2upg.show()
       bar1upg.changemult(bar1upg.getMult() + Math.log10(bar2upg.value+1)/15)
     }
