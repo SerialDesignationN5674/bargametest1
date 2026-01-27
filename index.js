@@ -78,27 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem("fullbars", fullbar)
           plus(this.id, 1)
           buyMax(){
-  let boughtSomething = false;
-
-  while(fullbar >= this.cost){
-    if((!this.repeatable && this.bought) || this.capped){
-      break;
-    }
-
-    fullbar -= this.cost;
-    this.cost = this.cost * this.scaling;
-    this.bought = true;
-    this.purchases += 1;
-    boughtSomething = true;
-
-    plus(this.id, 1);
-  }
-
-  if(boughtSomething){
-    this.update();
-    localStorage.setItem(this.id + "cost", this.cost);
-    localStorage.setItem("fullbars", fullbar);
-  }
+            let boughtSomething = false;
+            
+            while(fullbar >= this.cost){
+              if((!this.repeatable && this.bought) || this.capped){
+                break;
+              }
+            
+              fullbar -= this.cost;
+              this.cost = this.cost * this.scaling;
+              this.bought = true;
+              this.purchases += 1;
+              boughtSomething = true;
+            
+              plus(this.id, 1);
+              }
+              if(boughtSomething){
+                this.update();
+                localStorage.setItem(this.id + "cost", this.cost);
+                localStorage.setItem("fullbars", fullbar);
+              }
           }
         }
       }
