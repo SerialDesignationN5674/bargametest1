@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   class Upgrade { // class for upgrades duh
-    constructor(id, name,basecost,repeatable,active){
+    constructor(id, name,basecost,repeatable){
       const button = document.getElementById(id);
       if(!button){
         throw new Error("id wrong dumbass button doesn't exist")
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.capped = false;
       this.fullity = 0;
       this.generated = 0;
-      this.active = active
       button.innerText = name + " " + "Cost: " + basecost.toString();// because yes
       button.addEventListener('click', () => this.buy()); // JAUIREGJOAREGRAE
     }
@@ -47,21 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
     }
-    changemult(mult){
-        this.mult = mult;
-    }
-    getMult(){
-      return this.mult;
-    }
-    hide(){
-      document.getElementById(this.id).style.visibility = "hidden";
-    }
-    show(){
-      document.getElementById(this.id).style.visibility = "visible";
-    }
     updateFullity(){
-      let a = this.basecost*1000;
-      this.fullity = this.generated/a;
+      this.fullity = this.generated/this.basecost*1000;
     }
     update(){ // update ur head
       this.button.innerText = this.name + " " + "Cost: " + this.cost.toString();
@@ -77,16 +63,32 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem(this.id + "cost", this.cost)
           localStorage.setItem("fullbars", fullbar)
           plus(this.id, 1)
+
+          buyMax(){// I hope this works
+  let boughtSomething = false;
+
+  while(fullbar >= this.cost){
+    if((!this.repeatable && this.bought) || this.capped){
+      break;
+    }
+
+    fullbar -= this.cost;
+    this.cost = this.cost * this.scaling;
+    this.bought = true;
+    this.purchases += 1;
+    boughtSomething = true;
+
+    plus(this.id, 1);
+  }
+
+  if(boughtSomething){
+    this.update();
+    localStorage.setItem(this.id + "cost", this.cost);
+    localStorage.setItem("fullbars", fullbar);
+  }
+          }
         }
       }
-    }
-    resetfull(){
-      this.fullity = 0;
-      this.generated = 0;
-    }
-    reset(){
-      this.cost = this.basecost;
-      this.resetfull();
     }
     change(name,repeatable,scaling){ // change 
       if(name){
@@ -108,19 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getValue(){
      // so u dont divide ur brain by 0 accideantly
-      if(this.isActive == true){
       return ((localStorage.getItem(this.id) || this.purchases) * this.mult) / 20
-      } else {
-        return 0
-      }
-    }
-    isActive(){
-      return this.active;
-    }
-    changeactive(active){
-      this.active = active;
     }
   }
+
   class Text {
     constructor(id,text){
       this.id = id
@@ -163,22 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   class expand extends SacrificeBase{
     constructor(id,name,cost,scaling){
-      super(id,name,cost,scaling);
-      this.expanded = localStorage.getItem(id) || 0;
-    }
-    expand(){
-      if(this.expanded == 0){
-        this.expanded += 1;
-        bar2upg.show();
-        bar1upg.reset();
-      }
+      super(id,name,cost,scaling)
     }
   }
-  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true); // button to insert a brain
+  const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true) // button to insert a brain
   bar1upg.update() // update ur br
-  const bartext = new Text("fullbarstext", "ur bars");
-  const bar2upg = new Upgrade("buy2bar", "Buy second bar, 100, true");
-  bar2upg.hide();
+  const bartext = new Text("fullbarstext", "ur bars")
   let bar1full = false
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
@@ -188,12 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(bar1upg.isFull() == false){
       bar1upg.updateFullity() // dont ask the name
     }
+    const buyMaxBtn = document.getElementById("buy1barMax");
+buyMaxBtn.addEventListener("click", () => {
+  bar1upg.buyMax();
+});
     if(bar1upg.isFull() == true){
       bar1upg.change("Buy 1 bar ITS FULL ITS FULL") // Oh mi gawd! fix ur code u have terrible optimisation
-    }
-    if(bar2upg.isActive(){
-      bar2upg.show()
-      bar1upg.changemult(bar1upg.getMult() + Math.log10(bar2upg.value+1)/15)
     }
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
