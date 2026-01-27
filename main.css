@@ -11,3 +11,8 @@ p {
   padding: 20px 15px;
   font-size: 15px;
 }
+.buymax{
+  position: fixed;
+  bottom: 20px;
+  right: 20px; /* you can take it to left */
+}
