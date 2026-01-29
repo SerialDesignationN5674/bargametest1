@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true); // button to insert a brain
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars");
-  const bar2upg = new Upgrade("buy2bar", "Buy second bar", 100, true, false);
+  const bar2upg = new Upgrade("buy2bar", "Buy second bar", 100, true, false); // STUPID INTERPRETER I DIDNTAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
   bar2upg.hide();
   let bar1full = false;
   const buyMaxBtn = document.getElementById("buyMax");
