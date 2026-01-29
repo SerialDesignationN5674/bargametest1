@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
     }
-    changemult(mult){
+    changeMult(mult){
         this.mult = mult;
     }
     getMult(){
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     getValue(){
      // so u dont divide ur brain by 0 accideantly
-      if(this.isActive == true){
+      if(this.isActive() == true){
       return ((localStorage.getItem(this.id) || this.purchases) * this.mult) / 20
       } else {
         return 0
@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     constructor(id,name,cost,scaling){
       super(id,name,cost,scaling);
       this.expanded = localStorage.getItem(id) || 0;
+      this.button.addEventListener('click', () => this.expand());
     }
     expand(){
       if(this.expanded == 0){
@@ -200,9 +201,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar1upg = new Upgrade("buy1bar", "Buy 1 bar", 10, true); // button to insert a brain
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars");
-  const bar2upg = new Upgrade("buy2bar", "Buy second bar, 100, true");
+  const bar2upg = new Upgrade("buy2bar", "Buy second bar", 100, true, false);
   bar2upg.hide();
-  let bar1full = false
+  let bar1full = false;
+  const buyMaxBtn = document.getElementById("buyMax");
+    buyMaxBtn.addEventListener("click", () => {
+      bar1upg.buyMax();
+    });  
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
@@ -216,12 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if(bar2upg.isActive()){
       bar2upg.show()
-      bar1upg.changemult(bar1upg.getMult() + Math.log10(bar2upg.value+1)/15)
+      bar1upg.changeMult(bar1upg.getMult() + Math.log10(bar2upg.getValue()+1)/15)
     }
-    const buyMaxBtn = document.getElementById("buyMax");
-buyMaxBtn.addEventListener("click", () => {
-  bar1upg.buyMax();
-});
     localStorage.setItem("fullbars", fullbar) // nedrline
   }, 50)
 });
