@@ -77,13 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.setItem(this.id + "cost", this.cost)
           localStorage.setItem("fullbars", fullbar)
           plus(this.id, 1)
-          buyMax(){
-            let boughtSomething = false;
+        }
+      }
+    }
+    buyMax(){
+        let boughtSomething = false;
             
-            while(fullbar >= this.cost){
-              if((!this.repeatable && this.bought) || this.capped){
-                break;
-              }
+        while(fullbar >= this.cost){
+          if((!this.repeatable && this.bought) || this.capped){
+            break;
+          }
             
               fullbar -= this.cost;
               this.cost = this.cost * this.scaling;
@@ -99,9 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem("fullbars", fullbar);
               }
           }
-        }
-      }
-    }
     resetfull(){
       this.fullity = 0;
       this.generated = 0;
