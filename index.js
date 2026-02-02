@@ -202,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bar1upg.update() // update ur br
   const bartext = new Text("fullbarstext", "ur bars");
   const bar2upg = new Upgrade("buy2bar", "Buy second bar", 100, true, false); // STUPID INTERPRETER I DIDNTAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  const debugtext = new Text("debug", "debug")
   bar2upg.hide();
   let bar1full = false;
   const buyMaxBtn = document.getElementById("buyMax");
@@ -211,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const interval = setInterval(() => { // stupid while but js doesnt have wait
     bar1upg.update() // duh
     fullbar += bar1upg.getValue() || 0 // some nerd stuff
+    debugtext.update(" 1value: " + tostring(bar1upg.getValue()))
     bar1upg.addGenerated(bar1upg.getValue() || 0) // i wonder why we need this
     bartext.update("You have " + fullbar.toFixed(2).toString() + " " + "FullBars") // get a brain
     if(bar1upg.isFull() == false){
